@@ -1,0 +1,18 @@
+body {
+  padding: 25px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+#description {
+	padding-bottom: 15px;
+}
+#questionRow {
+	padding-top: 15px;
+}
+#speakerButton {
+	width: 64px;
+	height: 64px;
+}
