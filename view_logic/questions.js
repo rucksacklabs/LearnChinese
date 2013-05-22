@@ -1,12 +1,33 @@
+// Var definition
+var currentQuestionNo = -1;
+var questionList, currentQuestion;
+
+$('#questionRows').hide();
+$('#progress').hide();
+$('#container').spin('large');
+
+$.getJSON("/questions/getQuestionSet", function(data,status,xhr) {
+	console.log('ajax call callback');
+	if(status == 'error' | status == 'timeout', status == 'parseerror'){
+		// error occured, do something
+	} else { // success or notmodified
+		// start questioning
+		$('#container').spin(false);
+		$('#questionRows').show();
+		questionList = data;
+		loadNextQuestion();
+	}
+});
+
+/*
+ * Check the given input if it is correct
+ */
 $("#checkButton").click(function() {
 	var input = $("#userInput"), button = $("#checkButton");
 
 	// did we already checked
 	if(button.hasClass("btn-success") | button.hasClass("btn-info")) {
-		var progressBar = $('#progressBar');
-		var size = progressBar.css('width');
-		progressBar.css('width', size + 10);
-		var size = progressBar.css('width');
+		// var progressBar = $('#progressBar');
 		resetLayout();
 		loadNextQuestion();
 	} else {
@@ -43,12 +64,15 @@ var playAudio = function(audioFile) {
 		}
 }
 var isCorrect = function() {
-	if($('#userInput').val().length > 0) {
+	var userInput = $('#userInput').val();
+	var pinyin = replaceSoundSigns(currentQuestion.value.pinyin);
+	if(userInput == currentQuestion.value.pinyin | userInput == pinyin) {
 		return true;
 	} else {
 		return false;
 	}
 }
+
 var resetLayout= function() {
 	$("#container").css("background-color", "#eee");
 	$("#checkButton").removeClass("btn-info").addClass("btn-primary");
@@ -57,6 +81,9 @@ var resetLayout= function() {
 }
 
 var loadNextQuestion = function() {
-	$('#description').html('<h5>Do something else</h5>');
-	$('#question').html('<h5>Another Question</h5>');
+	currentQuestionNo++;
+	currentQuestion = questionList[currentQuestionNo];
+
+	$('#description').html('<h5>Give the pinyin for that character.</h5>');
+	$('#question').html('<h4>' + currentQuestion.value.character + '</h4>');
 }

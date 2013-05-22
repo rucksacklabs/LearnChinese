@@ -1,3 +1,10 @@
+// credentials for database
+var host = 'devkitchen.cloudant.com', 
+    dbport = 5984, 
+    username = 'dsheyawfutedortasingthem', 
+    password = 'ToidPXLpxVqSw6rJrOqBnYU0', 
+    database = 'http://'+ username +':' + password + '@' + host + ':' + dbport;
+
 
 /**
  * Module dependencies.
@@ -22,6 +29,7 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
+  app.use(express.static(path.join(__dirname, 'view_logic')));
 });
 
 app.configure('development', function(){
@@ -29,7 +37,10 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
-app.get('/questions', questions.index);
+app.get('/questions', questions.start);
+app.get('/questions/getQuestionSet', questions.getQuestionSet);
+app.get('/questions/getAllQuestions', questions.getAllQuestions);
+app.get('/AllQuestions', questions.AllQuestions);
 app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){

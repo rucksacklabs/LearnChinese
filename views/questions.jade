@@ -3,26 +3,26 @@ extends layout
 block content
 	.container
 		br
-		.progress
-			.bar.bar-success(style="width: 0%;")#progressBar
+		.progress#progress
+			.bar.bar-success(style="width: 33%;")#progressBar
 		br
-		.hero-unit(id="container")
-			.row-fluid#description
-				.span12
-					h4 Description what you should to
-			hr
-			.row-fluid#questionRow
-				.span6
-					if questionType == 'speech'
-						.div.block-level#question(align='center') 
-							img(src='speaker-dark.png')#speakerButton
-					else
-						.div.block-level#question
-							| Test Test
-				.span6
-					input(id="userInput", type="text", placeholder="Type something…").input-block-level
-			.row-fluid(id="buttonRow")
-				.span12(align="right")
-					button(id="checkButton", type="submit").btn.btn-primary Check
+		.well.well-large#container
+			.div#questionRows
+				.row-fluid#description
+					.span12
+						h4 Description what you should to
+				.row-fluid#questionRow
+					.span6
+						if questionType == 'speech'
+							.div.block-level#question(align='center') 
+								img(src='speaker-dark.png')#speakerButton
+						else
+							.div.block-level#question
+								| Test Test
+					.span6
+						input(id="userInput", type="text", placeholder="Type something…").input-block-level
+				.row-fluid(id="buttonRow")
+					.span12(align="right")
+						button(id="checkButton", type="submit").btn.btn-primary Check
 
-	script(src="application.js",type="text/javascript")
+	script(src="questions.js",type="text/javascript")
