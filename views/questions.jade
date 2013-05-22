@@ -18,11 +18,19 @@ block content
 								img(src='speaker-dark.png')#speakerButton
 						else
 							.div.block-level#question
-								| Test Test
+								| Test
 					.span6
 						input(id="userInput", type="text", placeholder="Type something…").input-block-level
 				.row-fluid(id="buttonRow")
 					.span12(align="right")
 						button(id="checkButton", type="submit").btn.btn-primary Check
+		.row
+			.span3#card
+				.well.well-large
+					.row(align="center")#card_character
+						h3 我
+						h5 wǒ
+					.row(align="center")#card_translation
+						h5 I, me
 
 	script(src="questions.js",type="text/javascript")

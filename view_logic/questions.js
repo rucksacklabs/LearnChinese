@@ -1,9 +1,10 @@
 // Var definition
 var currentQuestionNo = -1;
-var questionList, currentQuestion;
+var questionList, currentQuestion, audioElement;
 
 $('#questionRows').hide();
 $('#progress').hide();
+$('#card').hide();
 $('#container').spin('large');
 
 $.getJSON("/questions/getQuestionSet", function(data,status,xhr) {
@@ -39,6 +40,8 @@ $("#checkButton").click(function() {
 			input.addClass("danger");
 			$("#container").css("background-color", "#fad5d5");
 		}
+		showAnswer();
+		showCard();
 		button.removeClass("btn-primary").addClass("btn-info");
 		button.html('Proceed');
 	}
@@ -47,7 +50,18 @@ $("#checkButton").click(function() {
 $('#speakerButton').click(function(){
 	playAudio('chw3.mp3');
 });
-var audioElement;
+
+var showAnswer = function() {
+	$("#question > h4").append("&nbsp; &nbsp; " + currentQuestion.value.pinyin + " (" + replaceSoundSigns(currentQuestion.value.pinyin) + ")");
+}
+
+var showCard = function() {
+	$('#card_character').html("<h3>" + currentQuestion.value.character + "</h3>" + 
+							"<h5>" + currentQuestion.value.pinyin + "</h5>");
+	$('#card_translation').html("<h5>" + currentQuestion.value.translation + "</h5>");
+	$('#card').fadeIn(500);
+}
+
 var playAudio = function(audioFile) {
 		if(typeof audioElement != 'undefined') {
 			audioElement.play();
@@ -78,6 +92,7 @@ var resetLayout= function() {
 	$("#checkButton").removeClass("btn-info").addClass("btn-primary");
 	$("#checkButton").html('Check');
 	$("#userInput").val('');
+	$('#card').hide();
 }
 
 var loadNextQuestion = function() {
