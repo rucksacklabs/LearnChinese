@@ -1,13 +1,21 @@
 // Var definition
 var currentQuestionNo = -1;
-var questionList, currentQuestion, audioElement;
+var questionList, currentQuestion, audioElement, checked;
 
 $('#questionRows').hide();
-$('#progress').hide();
+// $('#progress').hide();
 $('#card').hide();
 $('#container').spin('large');
+$('#userInput').tooltip(
+	{
+		"placement": "right",
+		"trigger": "focus",
+		"title": "some tooltip"
+	}
+	);
 
-$.getJSON("/questions/getQuestionSet", function(data,status,xhr) {
+
+$.getJSON("/Questions/getQuestionSet", function(data,status,xhr) {
 	console.log('ajax call callback');
 	if(status == 'error' | status == 'timeout', status == 'parseerror'){
 		// error occured, do something
@@ -23,11 +31,11 @@ $.getJSON("/questions/getQuestionSet", function(data,status,xhr) {
 /*
  * Check the given input if it is correct
  */
-$("#checkButton").click(function() {
+var check = function() {
 	var input = $("#userInput"), button = $("#checkButton");
 
 	// did we already checked
-	if(button.hasClass("btn-success") | button.hasClass("btn-info")) {
+	if(checked == true) {
 		// var progressBar = $('#progressBar');
 		resetLayout();
 		loadNextQuestion();
@@ -40,16 +48,17 @@ $("#checkButton").click(function() {
 			input.addClass("danger");
 			$("#container").css("background-color", "#fad5d5");
 		}
+		checked = true;
 		showAnswer();
 		showCard();
 		button.removeClass("btn-primary").addClass("btn-info");
 		button.html('Proceed');
 	}
-});
+};
 
-$('#speakerButton').click(function(){
+var playAudio = function(){
 	playAudio('chw3.mp3');
-});
+};
 
 var showAnswer = function() {
 	$("#question > h4").append("&nbsp; &nbsp; " + currentQuestion.value.pinyin + " (" + replaceSoundSigns(currentQuestion.value.pinyin) + ")");
@@ -93,6 +102,7 @@ var resetLayout= function() {
 	$("#checkButton").html('Check');
 	$("#userInput").val('');
 	$('#card').hide();
+	checked = false;
 }
 
 var loadNextQuestion = function() {
@@ -102,3 +112,11 @@ var loadNextQuestion = function() {
 	$('#description').html('<h5>Give the pinyin for that character.</h5>');
 	$('#question').html('<h4>' + currentQuestion.value.character + '</h4>');
 }
+
+$("#checkButton").click(check);
+$('#speakerButton').click(playAudio);
+$("#userInput").keypress(function(e) {
+    if(e.which == 13) {
+        check();
+    }
+});
