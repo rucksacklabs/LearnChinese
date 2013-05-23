@@ -13,7 +13,7 @@ var host = 'devkitchen.cloudant.com',
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
-  , questions =  require('./routes/questions')
+  , questions =  require('./routes/Questions')
   , http = require('http')
   , path = require('path');
 
@@ -37,9 +37,9 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
-app.get('/questions', questions.start);
-app.get('/questions/getQuestionSet', questions.getQuestionSet);
-app.get('/questions/getAllQuestions', questions.getAllQuestions);
+app.get('/Questions', questions.start);
+app.get('/Questions/getQuestionSet', questions.getQuestionSet);
+app.get('/Questions/getAllQuestions', questions.getAllQuestions);
 app.get('/AllQuestions', questions.AllQuestions);
 app.get('/users', user.list);
 
