@@ -1,7 +1,7 @@
 $('#table').hide();
 $('#container').spin('large');
 
-$.getJSON("/questions/getAllQuestions", function(data, status, xhr) {
+$.getJSON("/Questions/getAllQuestions", function(data, status, xhr) {
 	console.log('ajax call callback');
 	if (status == 'error' | status == 'timeout', status == 'parseerror') {
 		// error occured, do something
