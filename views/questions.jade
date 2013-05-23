@@ -4,13 +4,15 @@ block content
 	.container
 		br
 		.progress#progress
-			.bar.bar-success(style="width: 33%;")#progressBar
-		br
+			.bar.bar-success(style="width: 45%;")#progressBar
+			.bar.bar-danger(style="width: 15%;")#progressBar
+			.bar(style="width: 40%;")#progressBar
 		.well.well-large#container
 			.div#questionRows
 				.row-fluid#description
 					.span12
 						h4 Description what you should to
+
 				.row-fluid#questionRow
 					.span6
 						if questionType == 'speech'
@@ -21,6 +23,23 @@ block content
 								| Test
 					.span6
 						input(id="userInput", type="text", placeholder="Type something…").input-block-level
+
+						//- ["ā", "á", "ǎ", "à","ē", "é", "ě", "è","ī", "í", "ǐ", "ì","ō", "ó", "ǒ", "ò","ū", "ú", "ǔ", "ù", "ǖ", "ǘ", "ǚ", "ǜ"];
+
+						.btn-group
+							a.btn.dropdown-toggle.btn-small(data-toggle='dropdown', href='#')
+								| A
+								span.caret
+							ul.dropdown-menu
+								li 
+									a(href="#") ā
+								li 
+									a(href="#") á
+								li 
+									a(href="#") ǎ
+								li 
+									a(href="#") à
+
 				.row-fluid(id="buttonRow")
 					.span12(align="right")
 						button(id="checkButton", type="submit").btn.btn-primary Check
