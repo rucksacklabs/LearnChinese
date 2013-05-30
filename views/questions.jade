@@ -15,41 +15,17 @@ block content
 
 				.row-fluid#questionRow
 					.span6
-						if questionType == 'speech'
-							.div.block-level#question(align='center') 
-								img(src='speaker-dark.png')#speakerButton
-						else
-							.div.block-level#question
+						//- .div.block-level#question(align='center') 
+						//- 	img(src='speaker-dark.png')#speakerButton
+						.div.block-level#question
 								| Test
 					.span6
 						input(id="userInput", type="text", placeholder="Type something…").input-block-level
-
-						//- ["ā", "á", "ǎ", "à","ē", "é", "ě", "è","ī", "í", "ǐ", "ì","ō", "ó", "ǒ", "ò","ū", "ú", "ǔ", "ù", "ǖ", "ǘ", "ǚ", "ǜ"];
-
-						.btn-group
-							a.btn.dropdown-toggle.btn-small(data-toggle='dropdown', href='#')
-								| A
-								span.caret
-							ul.dropdown-menu
-								li 
-									a(href="#") ā
-								li 
-									a(href="#") á
-								li 
-									a(href="#") ǎ
-								li 
-									a(href="#") à
+						include specialCharacterButtons
 
 				.row-fluid(id="buttonRow")
 					.span12(align="right")
 						button(id="checkButton", type="submit").btn.btn-primary Check
-		.row
-			.span3#card
-				.well.well-large
-					.row(align="center")#card_character
-						h3 我
-						h5 wǒ
-					.row(align="center")#card_translation
-						h5 I, me
+		include card
 
 	script(src="questions.js",type="text/javascript")

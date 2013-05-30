@@ -56,6 +56,27 @@ var check = function() {
 	}
 };
 
+var saveProgress = function() {
+	
+	var data = "{}";
+	var errorHandler = function() {
+
+	}
+	
+	var successHandler = function() {
+
+	}
+
+	$.ajax({
+		type: "POST",
+		url: "7Questions/saveProgress",
+		data: data,
+		success: successHandler,
+		error: errorHandler,
+		dataType: "JSON"
+	});
+}
+
 var playAudio = function(){
 	playAudio('chw3.mp3');
 };
@@ -111,6 +132,40 @@ var loadNextQuestion = function() {
 
 	$('#description').html('<h5>Give the pinyin for that character.</h5>');
 	$('#question').html('<h4>' + currentQuestion.value.character + '</h4>');
+}
+
+function insertAtCaret(text) {
+    var txtarea = document.getElementById("userInput");
+    var scrollPos = txtarea.scrollTop;
+    var strPos = 0;
+    var br = ((txtarea.selectionStart || txtarea.selectionStart == '0') ? 
+    	"ff" : (document.selection ? "ie" : false ) );
+    if (br == "ie") { 
+    	txtarea.focus();
+    	var range = document.selection.createRange();
+    	range.moveStart ('character', -txtarea.value.length);
+    	strPos = range.text.length;
+    }
+    else if (br == "ff") strPos = txtarea.selectionStart;
+
+    var front = (txtarea.value).substring(0,strPos);  
+    var back = (txtarea.value).substring(strPos,txtarea.value.length); 
+    txtarea.value=front+text+back;
+    strPos = strPos + text.length;
+    if (br == "ie") { 
+    	txtarea.focus();
+    	var range = document.selection.createRange();
+    	range.moveStart ('character', -txtarea.value.length);
+    	range.moveStart ('character', strPos);
+    	range.moveEnd ('character', 0);
+    	range.select();
+    }
+    else if (br == "ff") {
+    	txtarea.selectionStart = strPos;
+    	txtarea.selectionEnd = strPos;
+    	txtarea.focus();
+    }
+    txtarea.scrollTop = scrollPos;
 }
 
 $("#checkButton").click(check);

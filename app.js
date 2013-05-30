@@ -40,6 +40,7 @@ app.get('/', routes.index);
 app.get('/Questions', questions.start);
 app.get('/Questions/getQuestionSet', questions.getQuestionSet);
 app.get('/Questions/getAllQuestions', questions.getAllQuestions);
+app.get('/Questions/saveProgress', questions.saveProgress);
 app.get('/AllQuestions', questions.AllQuestions);
 app.get('/users', user.list);
 
