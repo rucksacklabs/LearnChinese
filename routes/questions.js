@@ -2,11 +2,11 @@ var database = 'http://localhost:5984';
 var nano = require('nano')(database);
 
 exports.start = function(req, res){
-	questionsText(req, res);
+	questions(req, res);
 };
 
 exports.index = function(req, res){
-	questionsText(req, res);
+	questions(req, res);
 };
 
 exports.getQuestionSet = function(req, res){
@@ -45,13 +45,14 @@ exports.getAllQuestions = function(req, res){
   	});
 };
 
+exports.saveProgress = function(req, res) {
+	res.end();
+}
+
 exports.AllQuestions = function(req, res){
 	res.render('allQuestions', { title: 'All Questions'});
 }
 
-var questionsSpeech = function(req, res){
-	res.render('questions', { title: 'Learn Chinese' , questionType: 'speech'});
-};
-var questionsText = function(req, res){
-	res.render('questions', { title: 'Learn Chinese' , questionType: 'text'});
+var questions = function(req, res){
+	res.render('questions', { title: 'Learn Chinese'});
 };
