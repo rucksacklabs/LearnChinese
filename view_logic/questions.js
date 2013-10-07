@@ -6,13 +6,12 @@ $('#questionRows').hide();
 // $('#progress').hide();
 $('#card').hide();
 $('#container').spin('large');
-$('#userInput').tooltip(
-	{
-		"placement": "right",
-		"trigger": "focus",
-		"title": "some tooltip"
-	}
-	);
+// $('#userInput').tooltip(
+// 	{
+// 		"placement": "right",
+// 		"trigger": "focus",
+// 		"title": "some tooltip"
+// 	});
 
 
 $.getJSON("/Questions/getQuestionSet", function(data,status,xhr) {
@@ -69,7 +68,7 @@ var saveProgress = function() {
 
 	$.ajax({
 		type: "POST",
-		url: "7Questions/saveProgress",
+		url: "/Questions/saveProgress",
 		data: data,
 		success: successHandler,
 		error: errorHandler,
@@ -97,14 +96,14 @@ var playAudio = function(audioFile) {
 			audioElement.play();
 		} else {
 
-        audioElement = document.createElement('audio');
-        audioElement.setAttribute('src', audioFile);
-        audioElement.setAttribute('autoplay', 'autoplay');
-        //audioElement.load()
-        $.get();
-        audioElement.addEventListener("load", function() {
-                audioElement.play();
-        }, true);
+	        audioElement = document.createElement('audio');
+	        audioElement.setAttribute('src', audioFile);
+	        audioElement.setAttribute('autoplay', 'autoplay');
+	        //audioElement.load()
+	        $.get();
+	        audioElement.addEventListener("load", function() {
+	                audioElement.play();
+	        }, true);
 		}
 }
 var isCorrect = function() {

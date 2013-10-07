@@ -53,6 +53,10 @@ exports.AllQuestions = function(req, res){
 	res.render('allQuestions', { title: 'All Questions'});
 }
 
+exports.LearningMap = function(req, res){
+	res.render('learningMap', { title: 'Learning Map'});
+}
+
 var questions = function(req, res){
 	res.render('questions', { title: 'Learn Chinese'});
 };

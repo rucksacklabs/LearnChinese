@@ -1,0 +1,24 @@
+extends layout
+
+block content
+	.container
+		br
+		.progress#progress
+		.well.well-large#container
+			.div#questionRows
+				.row-fluid#description
+					.span12
+						h4 Write down the pinyins for the given number
+
+				.row-fluid#questionRow
+					.span6
+						.div.block-level#number
+								| 0
+					.span6
+						input(id="userInput", type="text", placeholder="The number on the left in chinese").input-block-level
+
+				.row-fluid(id="buttonRow")
+					.span12(align="right")
+						button(id="checkButton", type="submit").btn.btn-primary Check
+
+	script(src="number_trainer.js",type="text/javascript")

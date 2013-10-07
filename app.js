@@ -14,6 +14,7 @@ var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
   , questions =  require('./routes/Questions')
+  , numberTrainer =  require('./routes/NumberTrainer')
   , http = require('http')
   , path = require('path');
 
@@ -41,8 +42,12 @@ app.get('/Questions', questions.start);
 app.get('/Questions/getQuestionSet', questions.getQuestionSet);
 app.get('/Questions/getAllQuestions', questions.getAllQuestions);
 app.get('/Questions/saveProgress', questions.saveProgress);
+app.get('/LearningMap', questions.LearningMap);
+app.get('/NumberTrainer', numberTrainer.trainer);
 app.get('/AllQuestions', questions.AllQuestions);
 app.get('/users', user.list);
+app.get('/channel', user.channel);
+app.get('/login', user.login);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
