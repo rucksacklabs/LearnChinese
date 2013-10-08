@@ -4,7 +4,7 @@ var current_number = 0;
 var numbers_cn = ["ling", "yi", "er", "san", "si", "wu", "liu", "qi", "ba", "jiu", "shi"];
 var current_state = 0;
 
-de.reneruck.learnchinese.numbertrainer.states = {
+states = {
     NUMBER_TO_PYNIN : 0,
     CHAR_TO_NUMBER : 1,
 }
@@ -14,23 +14,21 @@ var check = function(){
 	var user_input = $("#userInput").val();
 
 	switch(current_state) {
-		case de.reneruck.learnchinese.numbertrainer.states.NUMBER_TO_PYNIN:
-			var correct_result = getChinese(current_number);
+		case states.NUMBER_TO_PYNIN:
+			var correct_result = toPynin(current_number);
 			break;
-		case de.reneruck.learnchinese.numbertrainer.states.CHAR_TO_NUMBER:
+		case states.CHAR_TO_NUMBER:
 			var correct_result = current_number;
 			break;
 	}
 
-	console.log(correct_result);
-	if(user_input == correct_result) {
+	if(user_input.trim() == correct_result) {
 		correct();
 	} else {
 		wrong();
 	}
-	
 	if(question_no == 10) {
-		finish();
+		$('#finishedDialog').modal('show');
 	}else {
 		nextQuestion();
 	}
@@ -39,19 +37,18 @@ var check = function(){
 var correct = function(){
 	$("#progress").append("<div class='bar bar-success' style='width: 10%;''></div>");
 	answers_correct++;
-	console.log("Correct!");
 }
 
 var wrong = function(){
 	$("#progress").append("<div class='bar bar-danger' style='width: 10%;''></div>");
-	console.log("Wrong!");
 }
 
-var finish = function(){
+var resetGame = function(){
 	$("#progress").empty();
 	question_no = 1;
 	answers_correct = 0;
 	nextQuestion();
+	$('#finishedDialog').modal('hide');
 }
 
 var nextQuestion = function(){
@@ -65,7 +62,11 @@ var generateNumber = function(){
 	$("#number").html("<h3>" + current_number + "</h3>");
 }
 
-var getChinese = function(number) {
+var toCharacter = function(number) {
+
+}
+
+var toPynin = function(number) {
 	if(number <= 19 ) {
 		if(number > 10) {
 			return "shi " + numbers_cn[number%10];
@@ -82,6 +83,13 @@ var getChinese = function(number) {
 	}
 }
 generateNumber();
+$("#closeButton").click(function(){
+	window.location.replace('/');
+});
+$('#finishedDialog').on('hidden.bs.modal', function () {
+	resetGame();
+});
+$("#againButton").click(resetGame);
 $("#checkButton").click(check);
 $("#userInput").keypress(function(e) {
     if(e.which == 13) {

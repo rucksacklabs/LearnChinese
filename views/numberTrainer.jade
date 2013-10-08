@@ -8,7 +8,7 @@ block content
 			.div#questionRows
 				.row-fluid#description
 					.span12
-						h4 Write down the pinyins for the given number
+						h4 Write down the pinyins for the given number (e.g. 24 = 'er shi si')
 
 				.row-fluid#questionRow
 					.span6
@@ -21,4 +21,22 @@ block content
 					.span12(align="right")
 						button(id="checkButton", type="submit").btn.btn-primary Check
 
+	a.btn.btn-primary.btn-lg(data-toggle='modal', href='#finishedDialog') Launch demo modal
+
+	#finishedDialog.modal.fade(tabindex='-1', role='dialog', aria-labelledby='finishedDialogLabel', aria-hidden='true')
+		.modal-dialog
+			.modal-content
+				.modal-header
+					button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+					center 
+						h4.modal-title Finished!
+				.modal-body
+					center 
+						h4 Great Job!
+							br 
+							br
+							{#correct_answers} out of 10
+				.modal-footer
+					button.btn.btn-default(type='button', data-dismiss='modal', id='closeButton') Close
+					button.btn.btn-primary(type='button', id='againButton') Play again
 	script(src="number_trainer.js",type="text/javascript")
