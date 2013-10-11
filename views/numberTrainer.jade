@@ -21,7 +21,6 @@ block content
 					.span12(align="right")
 						button(id="checkButton", type="submit").btn.btn-primary Check
 
-	a.btn.btn-primary.btn-lg(data-toggle='modal', href='#finishedDialog') Launch demo modal
 
 	#finishedDialog.modal.fade(tabindex='-1', role='dialog', aria-labelledby='finishedDialogLabel', aria-hidden='true')
 		.modal-dialog
@@ -32,10 +31,8 @@ block content
 						h4.modal-title Finished!
 				.modal-body
 					center 
-						h4 Great Job!
-							br 
-							br
-							{#correct_answers} out of 10
+						#dialog_message
+							
 				.modal-footer
 					button.btn.btn-default(type='button', data-dismiss='modal', id='closeButton') Close
 					button.btn.btn-primary(type='button', id='againButton') Play again

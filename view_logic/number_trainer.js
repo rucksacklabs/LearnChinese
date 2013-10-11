@@ -1,6 +1,7 @@
 var question_no = 1;
 var answers_correct = 0;
 var current_number = 0;
+// var characters = ["零", "一"， "二", "三", "四", "五", "六", "七", "八", "九", "十" ];
 var numbers_cn = ["ling", "yi", "er", "san", "si", "wu", "liu", "qi", "ba", "jiu", "shi"];
 var current_state = 0;
 
@@ -28,6 +29,13 @@ var check = function(){
 		wrong();
 	}
 	if(question_no == 10) {
+		if(answers_correct > 5) {
+			var message = "<h2>Great Job!<br><br>" + answers_correct + " out of 10</h2>"
+		} else {
+			var message = "<h2>I'm sure you can do better<br><br>" + answers_correct + " out of 10</h2>"
+		}
+		$('#dialog_message').empty();
+		$('#dialog_message').html(message);
 		$('#finishedDialog').modal('show');
 	}else {
 		nextQuestion();
@@ -35,12 +43,12 @@ var check = function(){
 }
 
 var correct = function(){
-	$("#progress").append("<div class='bar bar-success' style='width: 10%;''></div>");
+	$("#progress").append("<div class='bar bar-success' style='width: 10%;'></div>");
 	answers_correct++;
 }
 
 var wrong = function(){
-	$("#progress").append("<div class='bar bar-danger' style='width: 10%;''></div>");
+	$("#progress").append("<div class='bar bar-danger' style='width: 10%;'></div>");
 }
 
 var resetGame = function(){
@@ -63,7 +71,9 @@ var generateNumber = function(){
 }
 
 var toCharacter = function(number) {
-
+ if(number <= 10){
+ 	return characters[number];
+ }
 }
 
 var toPynin = function(number) {
