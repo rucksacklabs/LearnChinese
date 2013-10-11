@@ -44,6 +44,7 @@ app.get('/Questions/getAllQuestions', questions.getAllQuestions);
 app.get('/Questions/saveProgress', questions.saveProgress);
 app.get('/LearningMap', questions.LearningMap);
 app.get('/NumberTrainer', numberTrainer.trainer);
+// app.get('/NumberTrainer/N2P', numberTrainer.trainer_routes);
 app.get('/AllQuestions', questions.AllQuestions);
 app.get('/users', user.list);
 app.get('/channel', user.channel);
