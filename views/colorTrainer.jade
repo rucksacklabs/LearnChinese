@@ -1,0 +1,40 @@
+extends layout
+
+block content
+	.container
+		br
+		.progress#progress
+		.well.well-large#container
+			.div#questionRows
+				.row-fluid#description
+					.span12
+						h4 
+
+				.row-fluid#questionRow
+					.span6
+						center
+							#color-box(style='width: 150px; height: 150px; background-color: #FF850A; border-style: solid; border-width: 1px; border-color: #000')
+								
+					.span6
+						input(id="userInput", type="text", placeholder="The number on the left in chinese").input-block-level
+
+				.row-fluid(id="buttonRow")
+					.span12(align="right")
+						button(id="checkButton", type="submit").btn.btn-primary Check
+
+
+	#finishedDialog.modal.fade(tabindex='-1', role='dialog', aria-labelledby='finishedDialogLabel', aria-hidden='true')
+		.modal-dialog
+			.modal-content
+				.modal-header
+					button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+					center 
+						h4.modal-title Finished!
+				.modal-body
+					center 
+						#dialog_message
+							
+				.modal-footer
+					button.btn.btn-default(type='button', data-dismiss='modal', id='closeButton') Close
+					button.btn.btn-primary(type='button', id='againButton') Play again
+	script(src="/color_trainer.js",type="text/javascript")

@@ -14,7 +14,7 @@ var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
   , questions =  require('./routes/Questions')
-  , numberTrainer =  require('./routes/NumberTrainer')
+  , trainer =  require('./routes/Trainer')
   , http = require('http')
   , path = require('path');
 
@@ -43,8 +43,7 @@ app.get('/Questions/getQuestionSet', questions.getQuestionSet);
 app.get('/Questions/getAllQuestions', questions.getAllQuestions);
 app.get('/Questions/saveProgress', questions.saveProgress);
 app.get('/LearningMap', questions.LearningMap);
-app.get('/NumberTrainer', numberTrainer.trainer);
-// app.get('/NumberTrainer/N2P', numberTrainer.trainer_routes);
+app.get('/Trainer/:trainerType', trainer.route);
 app.get('/AllQuestions', questions.AllQuestions);
 app.get('/users', user.list);
 app.get('/channel', user.channel);
